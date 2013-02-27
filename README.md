@@ -20,14 +20,11 @@ var item = or(arr, function(item) {
 console.log(item); // "other"
 
 // Real world example
-var matchesSelector = function() {
-    var shims = ['matchesSelector', 'mozMatchesSelector',
-        'webkitMatchesSelector', 'oMatchesSelector', 'msMatchesSelector'];
-
-    return or(shims, function(shim) {
-        return shim in document;
-    });
-}();
+var matchesSelector = or(['matchesSelector', 'mozMatchesSelector',
+    'webkitMatchesSelector', 'oMatchesSelector',
+    'msMatchesSelector'], function(shim) {
+    return shim in document.documentElement;
+});
 
 document.getElementById('some')[matchesSelector]('#some'); // true
 ```
